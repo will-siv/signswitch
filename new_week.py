@@ -53,7 +53,10 @@ def parseStmt(stmt):
 
     if len(hourmin) == 1:
       hourmin.append("00")
-    if len(hourmin[0]) != 2 or len(hourmin[1]) != 2:
+    if (len(hourmin[0]) != 2 or len(hourmin[1]) != 2) and not plus:
+      print(len(hourmin[0]) != 2)
+      print(plus)
+
       print(f'error: 24 hour format ({t})')
       return False
 
@@ -78,10 +81,10 @@ def parseStmt(stmt):
   if plus:
     ret[1][0] += ret[0][0]
     ret[1][1] += ret[0][1]
-    if ret[1][1] > 60:
+    if ret[1][1] >= 60:
       ret[1][1] -= 60
       ret[1][0] += 1
-    if ret[1][0] > 24:
+    if ret[1][0] >= 24:
       ret [1][0] -= 24
   return ret
 
@@ -163,7 +166,7 @@ def main():
       break
     if len(day) > 1:
       for key in s.keys():
-        if day in key:
+        if day == key[0:len(day)]: # does it match the beginning
           day = key
     if day not in s:
       print(f"{i} is not valid.\n")
