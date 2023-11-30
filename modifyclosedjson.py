@@ -47,7 +47,7 @@ def removeFromDay(d, day, out):
   print(out)
   tx, ty = out
   if tx[0] > ty[0]:
-    # next day
+    # next day - untested btw
     removeFromDay(d, getNextDay(d, day), [[0, 0], ty])
     ty = [23, 59]
   i = 0
@@ -177,6 +177,13 @@ def addChange(d, day):
   else:
     addToDay(d, day, out)
 
+def completeDay(s, day):
+  if len(day) > 1:
+    for key in s.keys():
+      if day == key[0:len(day)]: # does it match the beginning
+        day = key
+  return day
+
 def inputLoop(s):
   while True:
     printSchedule(s)
@@ -188,10 +195,7 @@ def inputLoop(s):
     print()
     if day == 'stop':
       break
-    if len(day) > 1:
-      for key in s.keys():
-        if day == key[0:len(day)]: # does it match the beginning
-          day = key
+    day = completeDay(s, day)
     if day not in s:
       print(f"{i} is not valid.\n")
       continue
