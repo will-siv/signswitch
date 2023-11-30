@@ -9,6 +9,9 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(closed_pin, GPIO.OUT)
 GPIO.setup(open_pin, GPIO.OUT)
 
+GPIO.output(open_pin, False)
+GPIO.output(closed_pin, True)
+
 def status():
   print(f"closed pin: {GPIO.input(closed_pin)}")
   print(f"open pin: {GPIO.input(open_pin)}")
