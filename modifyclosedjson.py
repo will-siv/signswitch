@@ -43,6 +43,7 @@ def getNextDay(d, day):
   except (ValueError, IndexError):
     return "sunday"
 
+# TODO not at all done, missing entire features
 def removeFromDay(d, day, out):
   print(out)
   tx, ty = out
@@ -148,7 +149,7 @@ def addChange(d, day):
   try:
     stmt = input()
   except EOFError:
-    return "EOF"
+    return
 
   # handle operations
   remove = False
@@ -165,12 +166,12 @@ def addChange(d, day):
       try:
         yn = input("Try again? [y/n] (y): ") or "y"
       except EOFError:
-        return "EOF"
+        return
       if yn == 'y' or yn == 'n':
         break
     if yn == 'y':
       return addChange(d, day)
-    return "invalid"
+    return 
 
   if remove:
     removeFromDay(d, day, out)
@@ -191,7 +192,7 @@ def inputLoop(s):
       i = input("What day would you like to change?\nType \"stop\" to save to file.\n")
       day = i.lower()
     except EOFError:
-      return "EOF"
+      return "err"
     print()
     if day == 'stop':
       break
@@ -199,5 +200,5 @@ def inputLoop(s):
     if day not in s:
       print(f"{i} is not valid.\n")
       continue
-    return addChange(s, day)
+    addChange(s, day)
 

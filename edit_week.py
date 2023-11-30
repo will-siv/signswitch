@@ -27,7 +27,7 @@ def main():
   # input loop
   err = modifyclosedjson.inputLoop(s)
 
-  if err == "EOF":
+  if err == "err":
     return
 
   print(f"Now saving to {file}")
