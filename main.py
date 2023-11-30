@@ -23,11 +23,11 @@ def switch():
   GPIO.output(open_pin, not GPIO.input(open_pin))
   GPIO.output(closed_pin, not GPIO.input(closed_pin))
 
-def open():
+def sign_open():
   GPIO.output(open_pin, True)
   GPIO.output(closed_pin, False)
 
-def closed():
+def sign_closed():
   GPIO.output(closed_pin, True)
   GPIO.output(open_pin, False)
 
@@ -42,17 +42,17 @@ def main():
       print("json file not valid!")
       return
     day = time.ctime()[0:3].lower()
-    day = modifyclosedjson.completeDay(day)
+    day = modifyclosedjson.completeDay(s, day)
     hour = t.tm_hour
     minute = t.tm_min
 
     currentDay = s[day]
     for t1, t2 in currentDay:
-      if t1 < hour, minute and hour, minute < t2:
-        closed()
+      if t1 < [hour, minute] and [hour, minute] < t2:
+        sign_closed()
 
     # if none of the times line up, then it's open
-    open()
+    sign_open()
 
     time.sleep(1)
     fp.close()
