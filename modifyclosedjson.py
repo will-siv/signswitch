@@ -67,7 +67,7 @@ def addToDay(d, day, out):
   [h1, m1], [h2, m2] = out
   if h1 > h2:
     # next day
-    d[day].append([[h1, m1], [23, 59]])
+    d[day].append([[h1, m1], [24, 00]])
     h1, m1 = 0, 0
     day = getNextDay(d, day)
   d[day].append([[h1, m1], [h2, m2]])
