@@ -47,12 +47,16 @@ def main():
     minute = t.tm_min
 
     currentDay = s[day]
+    closed = False
     for t1, t2 in currentDay:
-      if t1 < [hour, minute] and [hour, minute] < t2:
+      if t1 <= [hour, minute] and [hour, minute] < t2:
         sign_closed()
+        closed = True
+        break
 
     # if none of the times line up, then it's open
-    sign_open()
+    if not closed:
+      sign_open()
 
     time.sleep(1)
     fp.close()
